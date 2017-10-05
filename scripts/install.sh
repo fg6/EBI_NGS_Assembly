@@ -8,7 +8,7 @@ data=$ofolder/data
 mkdir -p $src
 cd $src
 
-exelist=( $src/minimap2/minimap2 $src/miniasm/miniasm $src/spades/bin/spades.py $src/Artemis/act )
+exelist=( $src/minimap2/minimap2 $src/miniasm/miniasm $src/spades/bin/spades.py $src/Artemis/act  $src/MUMmer3.23/dnadiff )
 datalist=( $data/Escherichiacoli-K-12.fasta $data/miseq1.fastq  $data/miseq2.fastq $data/nanopore.fastq )
 
 if [[ ! -f  $src/minimap2/minimap2 ]]; then
@@ -41,6 +41,61 @@ if [[ ! -f  $src/Artemis/act ]]; then
     cd Artemis/
     make
 fi
+
+
+if [[ ! -f $src/MUMmer3.23/dnadiff ]]; then
+    cd $src
+    wget --no-check-certificate https://kent.dl.sourceforge.net/project/mummer/mummer/3.23/MUMmer3.23.tar.gz  
+    tar -xvzf MUMmer3.23.tar.gz 
+    cd MUMmer3.23
+    make all
+    rm -f ../MUMmer3.23.tar.gz
+fi
+
+
+
+cd $src
+mkdir -p mylibs
+
+### Intalling gzstream (it needs zlib!)
+if [[ ! -d  mylibs/gzstream ]]  || [[ ! -f mylibs/gzstream/gzstream.o ]]; then
+    rm -rf mylibs/gzstream
+    cd mylibs
+    
+    wget https://www.cs.unc.edu/Research/compgeom/gzstream/gzstream.tgz 
+
+    if [[ "$?" != 0 ]]; then
+        echo "Error downloading gzstream, try again" 
+        rm -rf gzstream gzstream.tgz 
+        exit
+    else
+        tar -xvzf gzstream.tgz &> /dev/null
+        if [[ "$?" != 0 ]]; then echo " Error during gzstream un-compressing. Exiting now"; exit; fi
+        cd gzstream
+        make &> /dev/null
+        
+        if [[ "$?" != 0 ]]; then echo " Error during gzstream compilation. Exiting now"; exit; fi
+	test=`make test | grep "O.K" | wc -l`
+        if [[ $test == 1 ]]; then rm ../gzstream.tgz 
+        else  echo  " Gzstream test failed. Exiting now"; exit; fi
+    fi
+fi
+ 
+cd $src
+if [[ ! -f mylibs/gzstream/gzstream.o ]]; then 
+        echo "  !! Error: gzstream not installed properly!"; 
+        exit
+fi
+
+
+srcs=( n50 )
+for code in "${srcs[@]}"; do 
+    cd $src/$code
+    if [[ ! -f $code ]] || [[ $code -ot $code.cpp ]] || [[ $code -ot lowmem.h ]]; then
+        echo $code
+        make all
+    fi
+done
 
 
 ### download data

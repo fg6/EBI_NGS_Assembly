@@ -1,3 +1,9 @@
-src/Artemis  src/miniasm  src/minimap2	src/MUMmer3.23	src/spades
+src/mylibs
+src/n50/n50
+src/Artemis
+src/miniasm
+src/minimap2
+src/MUMmer3.23
+src/spades
 data
 results/
