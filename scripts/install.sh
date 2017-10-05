@@ -4,11 +4,12 @@
 
 ofolder=`pwd`
 src=$ofolder/src
+data=$ofolder/data
 mkdir -p $src
 cd $src
 
-list=( $src/minimap2/minimap2 $src/miniasm/miniasm $src/spades/bin/spades.py $src/Artemis/act )
-
+exelist=( $src/minimap2/minimap2 $src/miniasm/miniasm $src/spades/bin/spades.py $src/Artemis/act )
+datalist=( $data/Escherichiacoli-K-12.fasta $data/miseq1.fastq  $data/miseq2.fastq $data/nanopore.fastq )
 
 if [[ ! -f  $src/minimap2/minimap2 ]]; then
     rm -rf $src/minimap2
@@ -42,13 +43,30 @@ if [[ ! -f  $src/Artemis/act ]]; then
 fi
 
 
+### download data
+if [[ ! -d $data ]]; then
+    cd $ofolder/
+    wget ftp://ftp.sanger.ac.uk/pub/users/fg6/EBI_NGS_Assembly/data.tar.gz .
+    tar -xvzf data.tar.gz
+    rm -r data.tar.gz
+fi
+
 errs=0
-for exe in "${list[@]}"; do
+for exe in "${exelist[@]}"; do
     if [[ ! -f $exe ]]; then
         echo Error! Cannot find $exe
         errs=$(($errs+1))
     fi
 done
+
+for file in "${datalist[@]}"; do
+    if [[ ! -f $file ]]; then
+        echo Error! Cannot find $file
+        errs=$(($errs+1))
+    fi
+done
+
+
 
 if [  $errs -gt 0 ]; then echo " ****  Errors occurred! **** "; echo; exit;
 else echo " Congrats: installation successful!"; fi
