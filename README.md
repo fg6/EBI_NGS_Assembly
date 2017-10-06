@@ -6,7 +6,8 @@ Practical exercises for the EBI NGS Course -- Assembly Session
 
 
 ## Installation
-Requirements: wget, zlib, gcc, Python2: 2.4–2.7, and Python3: 3.2 or higher, Java 1.6 or higher
+Requirements: wget, zlib, gcc, Python2: 2.4–2.7, and Python3: 3.2 or higher, Java 1.6 or higher.
+
 Download repository, install utilities/compile tools, downaload data: 
 
     $ git clone https://github.com/fg6/EBI_NGS_Assembly.git
@@ -15,7 +16,7 @@ Download repository, install utilities/compile tools, downaload data:
   
 If everything went fine you should see a comment like this:
 
-  Congrats: installation successful!
+    Congrats: installation successful!
   
 ## Description of data
 In the data/ folder there are the following files:
@@ -29,6 +30,8 @@ In the data/ folder there are the following files:
       assemblies/spades_scaffolds.fasta    E.Coli scaffold assembly from SPAdes using the Miseq reads
 
 ## Run the examples
+Run each script from the main folder EBI_NGS_Assembly; if a script needs input files, provide the files including  their relative location.
+
 ### Generate the SPAdes assembly using the Miseq reads:
       
       $ ./scripts/spades.sh
