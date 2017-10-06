@@ -16,7 +16,7 @@ errs=0
 if [[ ! -f  $src/minimap2/minimap2 ]]; then
     rm -rf $src/minimap2
     cd $src
-    git clone https://github.com/lh3/minimap2 && (cd minimap && make)
+    git clone https://github.com/lh3/minimap2 && (cd minimap && make &> install.log)
     cd minimap2
     make
 fi
@@ -24,7 +24,7 @@ fi
 if [[ ! -f  $src/miniasm/miniasm ]]; then
     rm -rf $src/miniasm
     cd $src
-    git clone https://github.com/lh3/miniasm && (cd miniasm && make)
+    git clone https://github.com/lh3/miniasm && (cd miniasm && make &> install.log)
 fi
 
 if [[ ! -f  $src/spades/bin/spades.py ]]; then
@@ -32,7 +32,7 @@ if [[ ! -f  $src/spades/bin/spades.py ]]; then
     cd $src
     wget http://cab.spbu.ru/files/release3.11.1/SPAdes-3.11.1-Linux.tar.gz
     mkdir spades
-    tar -xzf SPAdes-3.11.1-Linux.tar.gz -C spades --strip-components 1
+    tar -xzf SPAdes-3.11.1-Linux.tar.gz -C spades --strip-components 1 &> install.log
     rm -r SPAdes-3.11.1-Linux.tar.gz
 fi
 
@@ -48,9 +48,9 @@ fi
 if [[ ! -f $src/MUMmer3.23/dnadiff ]]; then
     cd $src
     wget --no-check-certificate https://kent.dl.sourceforge.net/project/mummer/mummer/3.23/MUMmer3.23.tar.gz  
-    tar -xvzf MUMmer3.23.tar.gz 
+    tar -xzf MUMmer3.23.tar.gz 
     cd MUMmer3.23
-    make all
+    make all &> install.log
     rm -f ../MUMmer3.23.tar.gz
 fi
 
@@ -61,7 +61,7 @@ if [[ ! -d $src/forACT ]]; then
     cd $src
     git clone https://github.com/fg6/forACT.git
     cd forACT
-    ./launchme.sh install &> foract.install.log
+    ./launchme.sh install &> install.log
     test=`grep "Congrats:" foract.install.log | wc -l`
     if [[ $test != 1 ]]; then 
 	echo  " forACT installation failed" 
@@ -75,7 +75,7 @@ fi
 if [[ ! -d $data ]]; then
     cd $ofolder/
     wget ftp://ftp.sanger.ac.uk/pub/users/fg6/EBI_NGS_Assembly/data.tar.gz .
-    tar -xvzf data.tar.gz
+    tar -xzf data.tar.gz
     rm -r data.tar.gz
 fi
 
