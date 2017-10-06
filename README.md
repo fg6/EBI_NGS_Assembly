@@ -19,6 +19,7 @@ If everything went fine you should see a comment like this:
   
 ## Description of data
 In the data/ folder there are the following files:
+
       Escherichiacoli-K-12.fasta  =  E.Coli Reference assembly
       miseq1.fastq, miseq2.fastq	=  E.Coli Miseq (Illumina) data: read pairs
       nanopore.fastq  = E.Coli Oxford Nanopore Technologies reads
@@ -27,7 +28,7 @@ In the data/ folder there are the following files:
       assemblies/spades_contigs.fasta      E.Coli contig assembly from SPAdes using the Miseq reads
       assemblies/spades_scaffolds.fasta    E.Coli scaffold assembly from SPAdes using the Miseq reads
 
-## Run the exmples
+## Run the examples
 ### Generate the SPAdes assembly using the Miseq reads:
       
       $ ./scripts/spades.sh
@@ -43,3 +44,12 @@ Contig and Scaffold assemblies will be in results/spades/miseq_ont/contigs.fasta
       $ ./scripts/miniasm.sh
       
 Contig assembly will be in results/miniasm/miniasm.fasta
+
+### Check stats and average identity of an assembly with respect to the reference (for instance the miniasm assembly):
+    
+       $ ./scripts/check_assembly.sh data/Escherichiacoli-K-12.fasta results/miniasm/miniasm.fasta   
+       
+### Run the pipeline to map an assembly against the reference and visualize the result with ACT (for instance the miniasm assembly):
+
+       $ ./scripts/check_assembly.sh results/miniasm/miniasm.fasta data/Escherichiacoli-K-12.fasta 
+
