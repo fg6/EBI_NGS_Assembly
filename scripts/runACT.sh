@@ -1,4 +1,4 @@
-/home/training/EBI_NGS_Assembly/results/act_assembly.fa/ref/ref.fasta#!/bin/bash
+#!/bin/bash
 
 ofolder=`pwd`
 myforACT=$ofolder/src/forACT
