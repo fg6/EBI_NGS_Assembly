@@ -1,10 +1,6 @@
 # EBI_NGS_Assembly
 Practical exercises for the EBI NGS Course -- Assembly Session
 
-
-
-
-
 ## Installation
 Requirements: wget, zlib, gcc, Python2: 2.4–2.7, and Python3: 3.2 or higher, Java 1.6 or higher.
 
@@ -28,6 +24,11 @@ In the data/ folder there are the following files:
       assemblies/miniasm.fasta             E.Coli contig assembly from MiniAsm using the nanopore.fastq reads
       assemblies/spades_contigs.fasta      E.Coli contig assembly from SPAdes using the Miseq reads
       assemblies/spades_scaffolds.fasta    E.Coli scaffold assembly from SPAdes using the Miseq reads
+      assemblies/spades_hybrid_contigs.fasta      E.Coli contig assembly from SPAdes using the Miseq and the ONT reads
+      assemblies/spades_hybrid_scaffolds.fasta    E.Coli scaffold assembly from SPAdes using the Miseq and the ONT reads
+
+The assemblies in the data/assemblies folder are the same that the scripts below will generate, and are provided
+as a way to check the results. 
 
 ## Run the examples
 Run each script from the main folder EBI_NGS_Assembly; if a script needs input files, provide the files including  their relative location.
@@ -51,8 +52,12 @@ Contig assembly will be in results/miniasm/miniasm.fasta
 ### Check stats and average identity of an assembly with respect to the reference (for instance the miniasm assembly):
     
        $ ./scripts/check_assembly.sh data/Escherichiacoli-K-12.fasta results/miniasm/miniasm.fasta   
-       
+     
+The scripts/check_assembly.sh can also run on the assemblies provided in the data/assemblies folder.
+
 ### Run the pipeline to map an assembly against the reference and visualize the result with ACT (for instance the miniasm assembly):
 
-       $ ./scripts/check_assembly.sh results/miniasm/miniasm.fasta data/Escherichiacoli-K-12.fasta 
+       $ ./scripts/runACT.sh results/miniasm/miniasm.fasta data/Escherichiacoli-K-12.fasta 
 
+The scripts/runACT.sh can also run on the assemblies provided in the data/assemblies folder.
+The scripts/runACT.sh script will run the ACT provided in the PATH variable. The training computers have ACT installed and ready to use. If using this repo on own computer and don't have ACT, you can try to use the act version installed in: EBI_NGS_Assembly/src/forACT/utils/mysrcs/Artemis/act, just add the full path to this ACT into your PATH environment variable. (this installation not working on the training computers).
