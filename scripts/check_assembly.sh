@@ -17,7 +17,7 @@ mkdir -p $where
 cd $where
 
 echo
-$ofolder/src/n50/n50 $ofolder/$assembly | tee n50.stats
+$ofolder/src/forACT/utils/mysrcs/n50/n50 $ofolder/$assembly | tee n50.stats
 if [[ -f n50.stats ]]; then
    echo Assembly stats saved in $where/n50.stats
 else

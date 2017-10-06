@@ -11,6 +11,8 @@ cd $src
 exelist=( $src/minimap2/minimap2 $src/miniasm/miniasm $src/spades/bin/spades.py $src/Artemis/act  $src/MUMmer3.23/dnadiff )
 datalist=( $data/Escherichiacoli-K-12.fasta $data/miseq1.fastq  $data/miseq2.fastq $data/nanopore.fastq )
 
+errs=0
+
 if [[ ! -f  $src/minimap2/minimap2 ]]; then
     rm -rf $src/minimap2
     cd $src
@@ -53,39 +55,20 @@ if [[ ! -f $src/MUMmer3.23/dnadiff ]]; then
 fi
 
 
+#wget https://netix.dl.sourceforge.net/project/staden/staden/2.0.0b11/staden-2.0.0b11-2016-src.tar.gz
 
-cd $src
-mkdir -p mylibs
-
-### Intalling gzstream (it needs zlib!)
-if [[ ! -d  mylibs/gzstream ]]  || [[ ! -f mylibs/gzstream/gzstream.o ]]; then
-    rm -rf mylibs/gzstream
-    cd mylibs
-    
-    wget https://www.cs.unc.edu/Research/compgeom/gzstream/gzstream.tgz 
-
-    if [[ "$?" != 0 ]]; then
-        echo "Error downloading gzstream, try again" 
-        rm -rf gzstream gzstream.tgz 
-        exit
-    else
-        tar -xvzf gzstream.tgz &> /dev/null
-        if [[ "$?" != 0 ]]; then echo " Error during gzstream un-compressing. Exiting now"; exit; fi
-        cd gzstream
-        make &> /dev/null
-        
-        if [[ "$?" != 0 ]]; then echo " Error during gzstream compilation. Exiting now"; exit; fi
-	test=`make test | grep "O.K" | wc -l`
-        if [[ $test == 1 ]]; then rm ../gzstream.tgz 
-        else  echo  " Gzstream test failed. Exiting now"; exit; fi
+if [[ ! -d $src/forACT ]]; then
+    cd $src
+    git clone https://github.com/fg6/forACT.git
+    cd forACT
+    ./launchme.sh install &> foract.install.log
+    test=`grep "Congrats:" foract.install.log | wc -l`
+    if [[ $test != 1 ]]; then 
+	echo  " forACT installation failed" 
+	errs=$(($errs+1))
     fi
 fi
- 
-cd $src
-if [[ ! -f mylibs/gzstream/gzstream.o ]]; then 
-        echo "  !! Error: gzstream not installed properly!"; 
-        exit
-fi
+
 
 
 srcs=( n50 )
@@ -106,7 +89,6 @@ if [[ ! -d $data ]]; then
     rm -r data.tar.gz
 fi
 
-errs=0
 for exe in "${exelist[@]}"; do
     if [[ ! -f $exe ]]; then
         echo Error! Cannot find $exe
