@@ -1,4 +1,4 @@
-#!/bin/bash
+/home/training/EBI_NGS_Assembly/results/act_assembly.fa/ref/ref.fasta#!/bin/bash
 
 ofolder=`pwd`
 myforACT=$ofolder/src/forACT
@@ -30,4 +30,5 @@ cd $where
 ./mypipeline.sh align
 ./mypipeline.sh check
 ./mypipeline.sh prepfiles
-./mypipeline.sh act
+#./mypipeline.sh act
+act /home/training/EBI_NGS_Assembly/results/act_assembly.fa/ref/ref.fasta /home/training/EBI_NGS_Assembly/results/act_assembly.fa/minimap2_5000000/unique/foractnonoise0.2_minid30.al /home/training/EBI_NGS_Assembly/results/act_assembly.fa/minimap2_5000000/unique/foractnonoise0.2_minid30.fasta
