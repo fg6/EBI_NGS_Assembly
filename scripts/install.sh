@@ -71,16 +71,6 @@ fi
 
 
 
-srcs=( n50 )
-for code in "${srcs[@]}"; do 
-    cd $src/$code
-    if [[ ! -f $code ]] || [[ $code -ot $code.cpp ]] || [[ $code -ot lowmem.h ]]; then
-        echo $code
-        make all
-    fi
-done
-
-
 ### download data
 if [[ ! -d $data ]]; then
     cd $ofolder/
