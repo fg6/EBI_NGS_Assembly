@@ -16,7 +16,7 @@ errs=0
 if [[ ! -f  $src/minimap2/minimap2 ]]; then
     rm -rf $src/minimap2
     cd $src
-    git clone https://github.com/lh3/minimap2 && (cd minimap && make &> install.log)
+    git clone https://github.com/lh3/minimap2 &> down.log && (cd minimap2 && make &> install.log)
     cd minimap2
     make
 fi
@@ -24,13 +24,13 @@ fi
 if [[ ! -f  $src/miniasm/miniasm ]]; then
     rm -rf $src/miniasm
     cd $src
-    git clone https://github.com/lh3/miniasm && (cd miniasm && make &> install.log)
+    git clone https://github.com/lh3/miniasm &>> down.log  && (cd miniasm && make &> install.log)
 fi
 
 if [[ ! -f  $src/spades/bin/spades.py ]]; then
     rm -rf $src/spades
     cd $src
-    wget http://cab.spbu.ru/files/release3.11.1/SPAdes-3.11.1-Linux.tar.gz
+    wget http://cab.spbu.ru/files/release3.11.1/SPAdes-3.11.1-Linux.tar.gz &>> down.log 
     mkdir spades
     tar -xzf SPAdes-3.11.1-Linux.tar.gz -C spades --strip-components 1 &> install.log
     rm -r SPAdes-3.11.1-Linux.tar.gz
@@ -39,7 +39,7 @@ fi
 if [[ ! -f  $src/Artemis/act ]]; then
     rm -rf $src/Artemis
     cd $src
-    git clone https://github.com/sanger-pathogens/Artemis.git
+    git clone https://github.com/sanger-pathogens/Artemis.git &>> down.log 
     cd Artemis/
     make
 fi
@@ -47,7 +47,7 @@ fi
 
 if [[ ! -f $src/MUMmer3.23/dnadiff ]]; then
     cd $src
-    wget --no-check-certificate https://kent.dl.sourceforge.net/project/mummer/mummer/3.23/MUMmer3.23.tar.gz  
+    wget --no-check-certificate https://kent.dl.sourceforge.net/project/mummer/mummer/3.23/MUMmer3.23.tar.gz   &>> down.log 
     tar -xzf MUMmer3.23.tar.gz 
     cd MUMmer3.23
     make all &> install.log
@@ -59,7 +59,7 @@ fi
 
 if [[ ! -d $src/forACT ]]; then
     cd $src
-    git clone https://github.com/fg6/forACT.git
+    git clone https://github.com/fg6/forACT.git &>> down.log 
     cd forACT
     ./launchme.sh install &> install.log
     test=`grep "Congrats:" foract.install.log | wc -l`
@@ -74,7 +74,7 @@ fi
 ### download data
 if [[ ! -d $data ]]; then
     cd $ofolder/
-    wget ftp://ftp.sanger.ac.uk/pub/users/fg6/EBI_NGS_Assembly/data.tar.gz .
+    wget ftp://ftp.sanger.ac.uk/pub/users/fg6/EBI_NGS_Assembly/data.tar.gz  &>> down.log 
     tar -xzf data.tar.gz
     rm -r data.tar.gz
 fi
