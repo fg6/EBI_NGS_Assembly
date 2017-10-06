@@ -17,16 +17,14 @@ if [[ ! -f  $src/minimap2/minimap2 ]]; then
     echo Installing minimap2
     rm -rf $src/minimap2
     cd $src
-    git clone https://github.com/lh3/minimap2 &> down.log && (cd minimap2 && make &> install.log)
-    cd minimap2
-    make
+    git clone https://github.com/lh3/minimap2 &> down.log && cd minimap2 && make &> install.log
 fi
 
 if [[ ! -f  $src/miniasm/miniasm ]]; then
     echo Installing miniasm
     rm -rf $src/miniasm
     cd $src
-    git clone https://github.com/lh3/miniasm &>> down.log  && (cd miniasm && make &> install.log)
+    git clone https://github.com/lh3/miniasm &>> down.log  && cd miniasm && make &> install.log
 fi
 
 if [[ ! -f  $src/spades/bin/spades.py ]]; then
@@ -45,7 +43,7 @@ if [[ ! -f  $src/Artemis/act ]]; then
     cd $src
     git clone https://github.com/sanger-pathogens/Artemis.git &>> down.log 
     cd Artemis/
-    make
+    make &> install.log
 fi
 
 
