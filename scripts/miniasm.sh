@@ -20,8 +20,8 @@ else
 	#Layout:
 	$miniasm -f $reads overlaps.paf > reads.gfa  
 	# Fasta from graph:
-	cat reads.gfa | egrep "^S" | awk '{print ">" $2"\n"$3}' > assembly.fa
+	cat reads.gfa | egrep "^S" | awk '{print ">" $2"\n"$3}' > miniasm.fasta
 
-        echo assembly should be in $ofolder/results/miniasm/assembly.fa
+        echo assembly should be in $ofolder/results/miniasm/miniasm.fasta
 fi
 
