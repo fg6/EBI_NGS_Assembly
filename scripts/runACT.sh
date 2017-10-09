@@ -11,8 +11,9 @@ if [ $# -lt 2 ] || [ $1 == '-h' ]; then
     echo; echo "  Usage:" $(basename $0)  assembly.fasta reference.fasta 
     exit
 fi
-where=$ofolder/results/act_$(basename $assembly .fasta)
+where=$ofolder/results/act/act_$(basename $assembly .fasta)
 mkdir -p $where
+
 
 echo
 if [[ ! -f $where/mysettings.sh ]]; then
@@ -22,13 +23,16 @@ if [[ ! -f $where/mysettings.sh ]]; then
     # change some settings:
     sed -i 's#shred=10000#shred=5000000#g' mysettings.sh  # no shredding
     sed -i 's#lfsjobs=1#lfsjobs=0#g'  mysettings.sh
-    sed -i 's#minid=70#minid=30#g'  mysettings.sh
+    sed -i 's#minid=70#minid=10#g'  mysettings.sh
 fi
 cd $where
 
 # launch forACT
 ./mypipeline.sh align
 ./mypipeline.sh check
-./mypipeline.sh prepfiles
+./mypipeline.sh prepfiles | head -8
+
+
 #./mypipeline.sh act
-act /home/training/EBI_NGS_Assembly/results/act_assembly.fa/ref/ref.fasta /home/training/EBI_NGS_Assembly/results/act_assembly.fa/minimap2_5000000/unique/foractnonoise0.2_minid30.al /home/training/EBI_NGS_Assembly/results/act_assembly.fa/minimap2_5000000/unique/foractnonoise0.2_minid30.fasta
+act $reference $where/minimap2_5000000/unique/foractnonoise0.2_minid10.al  $where/minimap2_5000000/unique/foractnonoise0.2_minid10.fasta
+

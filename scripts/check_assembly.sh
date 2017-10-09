@@ -9,7 +9,7 @@ if [ $# -lt 2 ] || [ $1 == '-h' ]; then
     echo; echo "  Usage:" $(basename $0) assembly.fasta reference.fasta 
     exit
 fi
-where=$ofolder/results/report_$(basename $assembly .fasta)
+where=$ofolder/results/report/report_$(basename $assembly .fasta)
 
 
 

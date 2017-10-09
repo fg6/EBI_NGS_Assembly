@@ -4,7 +4,7 @@ ofolder=`pwd`
 minimap2=$ofolder/src/minimap2/minimap2
 miniasm=$ofolder/src/miniasm/miniasm
 
-reads=$ofolder/data/nanopore.fastq
+reads=$ofolder/data/fastq/nanopore.fastq
 
 if [ -f $reads ]; then check=`head -1 $reads`; fi
 if [ ! -f $reads ]; then
