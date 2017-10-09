@@ -24,7 +24,7 @@ In the data/ folder there are the following files and folders:
     miseq1.fastq, miseq2.fastq	=  E.Coli Miseq (Illumina) data: read pairs
     nanopore.fastq  = E.Coli Oxford Nanopore Technologies reads
     
-  the results/ folder contains the assemblies and act results that the pipeline generates:
+  the results/ folder contains the assemblies and act results to compare with the one you generate:
      
       assemblies/miniasm.fasta             E.Coli contig assembly from MiniAsm using the nanopore.fastq reads
       assemblies/spades_contigs.fasta      E.Coli contig assembly from SPAdes using the Miseq reads
