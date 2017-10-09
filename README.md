@@ -15,17 +15,28 @@ If everything went fine you should see a comment like this:
     Congrats: installation successful!
   
 ## Description of data
-In the data/ folder there are the following files:
+In the data/ folder there are the following files and folders:
 
       Escherichiacoli-K-12.fasta  =  E.Coli Reference assembly
-      miseq1.fastq, miseq2.fastq	=  E.Coli Miseq (Illumina) data: read pairs
-      nanopore.fastq  = E.Coli Oxford Nanopore Technologies reads
       
+  the fastq/ folder contains Illumina and Oxford Nanopore read files:
+
+    miseq1.fastq, miseq2.fastq	=  E.Coli Miseq (Illumina) data: read pairs
+    nanopore.fastq  = E.Coli Oxford Nanopore Technologies reads
+    
+  the results/ folder contains the assemblies and act results that the pipeline generates:
+     
       assemblies/miniasm.fasta             E.Coli contig assembly from MiniAsm using the nanopore.fastq reads
       assemblies/spades_contigs.fasta      E.Coli contig assembly from SPAdes using the Miseq reads
       assemblies/spades_scaffolds.fasta    E.Coli scaffold assembly from SPAdes using the Miseq reads
-      assemblies/spades_hybrid_contigs.fasta      E.Coli contig assembly from SPAdes using the Miseq and the ONT reads
-      assemblies/spades_hybrid_scaffolds.fasta    E.Coli scaffold assembly from SPAdes using the Miseq and the ONT reads
+      assemblies/hybridspades_contigs.fasta      E.Coli contig assembly from SPAdes using the Miseq and the ONT reads
+      assemblies/hybridspades_scaffolds.fasta    E.Coli scaffold assembly from SPAdes using the Miseq and the ONT reads
+
+      act/act_miniasm                  alignment and fasta file to run ACT for the miniasm assembly
+      act/act_spades_contigs                  alignment and fasta file to run ACT for the SPAdes contigs
+      act/act_spades_scaffolds                alignment and fasta file to run ACT for the SPAdes scaffolds
+      act/act_hybridspades_contigs            alignment and fasta file to run ACT for the hybridSPAdes contigs
+      act/act_hybridspades_scaffolds          alignment and fasta file to run ACT for the hybridSPAdes scaffolds
 
 The assemblies in the data/assemblies folder are the same that the scripts below will generate, and are provided
 as a way to check the results. 
