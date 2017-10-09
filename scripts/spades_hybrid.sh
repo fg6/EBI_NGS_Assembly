@@ -9,5 +9,5 @@ mkdir -p results/spades
 cd results/spades
 $ofolder/src/spades/bin/spades.py --pe1-1 $reads1 --pe1-2 $reads2 --nanopore $long_reads -t 15 -o miseq_ont
 
-mv contigs.fasta spades_plusont_contigs.fasta
-mv scaffolds.fasta spades_plusont_scaffolds.fasta
+mv contigs.fasta hybridspades_contigs.fasta
+mv scaffolds.fasta hybridspades_scaffolds.fasta
