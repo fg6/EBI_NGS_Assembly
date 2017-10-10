@@ -5,13 +5,13 @@
 ofolder=`pwd`
 src=$ofolder/src
 data=$ofolder/data
-log=$ofolder/log
-mkdir -p $log
+
+
 mkdir -p $src
 cd $src
 
 exelist=( $src/minimap2/minimap2 $src/miniasm/miniasm $src/spades/bin/spades.py  $src/MUMmer3.23/dnadiff )
-datalist=( $data/Escherichiacoli-K-12.fasta $data/miseq1.fastq  $data/miseq2.fastq $data/nanopore.fastq )
+datalist=( $data/Escherichiacoli-K-12.fasta $data/fastq/miseq1.fastq  $data/fastq/miseq2.fastq $data/fastq/nanopore.fastq )
 
 errs=0
 
@@ -19,21 +19,21 @@ if [[ ! -f  $src/minimap2/minimap2 ]]; then
     echo Installing minimap2 ...
     rm -rf $src/minimap2
     cd $src
-    git clone https://github.com/lh3/minimap2 &> $log/download.log && cd minimap2 && make &> install.log
+    git clone https://github.com/lh3/minimap2 &> download.log && cd minimap2 && make &> install.log
 fi
 
 if [[ ! -f  $src/miniasm/miniasm ]]; then
     echo Installing miniasm ...
     rm -rf $src/miniasm
     cd $src
-    git clone https://github.com/lh3/miniasm &>>  $log/download.log  && cd miniasm && make &> install.log
+    git clone https://github.com/lh3/miniasm &>>  download.log  && cd miniasm && make &> install.log
 fi
 
 if [[ ! -f  $src/spades/bin/spades.py ]]; then
     echo Installing SPAdes ...
     rm -rf $src/spades
     cd $src
-    wget http://cab.spbu.ru/files/release3.11.1/SPAdes-3.11.1-Linux.tar.gz &>>  $log/download.log 
+    wget http://cab.spbu.ru/files/release3.11.1/SPAdes-3.11.1-Linux.tar.gz &>>  download.log 
     mkdir spades
     tar -xzf SPAdes-3.11.1-Linux.tar.gz -C spades --strip-components 1 &> install.log
     rm -r SPAdes-3.11.1-Linux.tar.gz
@@ -52,7 +52,7 @@ fi
 if [[ ! -f $src/MUMmer3.23/dnadiff ]]; then
     echo Installing MUMmer ...
     cd $src
-    wget --no-check-certificate https://kent.dl.sourceforge.net/project/mummer/mummer/3.23/MUMmer3.23.tar.gz   &>>  $log/download.log 
+    wget --no-check-certificate https://kent.dl.sourceforge.net/project/mummer/mummer/3.23/MUMmer3.23.tar.gz   &>>  download.log 
     tar -xzf MUMmer3.23.tar.gz 
     cd MUMmer3.23
     make all &> install.log
@@ -65,7 +65,7 @@ fi
 if [[ ! -d $src/forACT ]]; then
     echo Installing forACT ...
     cd $src
-    git clone https://github.com/fg6/forACT.git &>>  $log/download.log 
+    git clone https://github.com/fg6/forACT.git &>>  download.log 
     cd forACT
     ./launchme.sh install &> install.log
     test=`grep "Congrats:" install.log | wc -l`
@@ -81,7 +81,7 @@ fi
 if [[ ! -d $data ]]; then
     echo Downloading data ...
     cd $ofolder/
-    wget ftp://ftp.sanger.ac.uk/pub/users/fg6/EBI_NGS_Assembly/data.tar.gz  &>>  $log/download.log 
+    wget ftp://ftp.sanger.ac.uk/pub/users/fg6/EBI_NGS_Assembly/data.tar.gz  &>>  download.log 
     tar -xzf data.tar.gz
     rm -r data.tar.gz
 fi
