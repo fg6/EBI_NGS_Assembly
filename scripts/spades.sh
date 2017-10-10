@@ -23,6 +23,6 @@ else
 	cd results/spades
 	$ofolder/src/spades/bin/spades.py --pe1-1 $reads1 --pe1-2 $reads2 -t 15 -o miseq
 	
-	mv contigs.fasta spades_contigs.fasta
-	mv scaffolds.fasta spades_scaffolds.fasta
+	mv miseq/contigs.fasta miseq/spades_contigs.fasta
+	mv miseq/scaffolds.fasta miseq/spades_scaffolds.fasta
 fi

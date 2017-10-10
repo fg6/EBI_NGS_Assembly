@@ -29,6 +29,6 @@ else
 	cd results/spades
 	$ofolder/src/spades/bin/spades.py --pe1-1 $reads1 --pe1-2 $reads2 --nanopore $long_reads -t 15 -o miseq_ont
 
-	mv contigs.fasta hybridspades_contigs.fasta
-	mv scaffolds.fasta hybridspades_scaffolds.fasta
+	mv miseq_ont/contigs.fasta miseq_ont/hybridspades_contigs.fasta
+	mv miseq_ont/scaffolds.fasta miseq_ont/hybridspades_scaffolds.fasta
 fi

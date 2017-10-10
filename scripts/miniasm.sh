@@ -22,6 +22,11 @@ else
 	# Fasta from graph:
 	cat reads.gfa | egrep "^S" | awk '{print ">" $2"\n"$3}' > miniasm.fasta
 
-        echo assembly should be in $ofolder/results/miniasm/miniasm.fasta
+
+        if [[ -f $ofolder/results/miniasm/miniasm.fasta ]]; then
+	        echo; echo Miniasm assembly ready in $ofolder/results/miniasm/miniasm.fasta
+	else
+		echo; echo Some errors occurred, assembly not generated
+	fi
 fi
 
