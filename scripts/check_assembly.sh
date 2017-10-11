@@ -12,7 +12,7 @@ fi
 where=$ofolder/results/report/report_$(basename $assembly .fasta)
 
 
-
+rm -rf $where
 mkdir -p $where
 cd $where
 
