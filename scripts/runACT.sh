@@ -33,6 +33,6 @@ cd $where
 ./mypipeline.sh prepfiles | head -8
 
 
-#./mypipeline.sh act
-act $reference $where/minimap2_5000000/unique/foractnonoise0.2_minid10.al  $where/minimap2_5000000/unique/foractnonoise0.2_minid10.fasta
+./mypipeline.sh act
+#act $reference $where/minimap2_5000000/unique/foractnonoise0.2_minid10.al  $where/minimap2_5000000/unique/foractnonoise0.2_minid10.fasta
 
