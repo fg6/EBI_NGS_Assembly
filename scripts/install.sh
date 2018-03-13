@@ -79,9 +79,9 @@ fi
 
 ### download data
 if [[ ! -d $data ]]; then
-    echo Downloading data ...
+    echo Extracting data ...
     cd $ofolder/
-    wget ftp://ftp.sanger.ac.uk/pub/users/fg6/EBI_NGS_Assembly/data.tar.gz  &>>  download.log 
+    wget ftp://ftp.sanger.ac.uk/pub/users/zn1/assembly/EBI_NGS_course/data.tar.gz  &>>  download.log 
     tar -xzf data.tar.gz
     rm -r data.tar.gz
 fi
